@@ -1,0 +1,36 @@
+# Python ver. 3.7
+# Notwendige Bibliotheken
+from wordcloud import WordCloud   
+import matplotlib.pyplot as plt   
+from nltk.corpus import stopwords 
+
+# Weist einer Variable die deutschen Stoppwörter zu;
+# Zugriff auf den nltk.corpus
+stopset = stopwords.words("german")
+
+# Weist einer Variable die .txt-Datei zu, kodiert diesen Datei in UTF-8
+# und liest sie  
+file = open("Dateipfad\\.txt-Datei", encoding='utf-8').read()
+
+# Nutzung der wordcloud-Bibliothek; Parameter im Konstruktor dienen zum Einen, die Auflösung
+# des gesamten Bildes bzw. der Wörter im Bild scharf darzustellen (width/height), und zum Anderen, um die vorher
+# zugewiesenen deutschen Stoppwörter einzupflegen
+# Anschließend wird die 'file' Variable generiert
+word_cloud = WordCloud(width=1300, height=800, stopwords=stopset).generate(file)
+
+# Nutzung der matplotlib-Bibliothek;
+# figure() erzeugt das dargestellte Bild; Parameterfunktion figsize() erzeugt Höhe und Breite des Körpers
+# facecolor gibt die Hintergrundsfarbe des Bildes an, hier Schwarz
+plt.figure(figsize=(15, 10), facecolor='k')
+
+# imshow() stellt die zugewiesenen Werte in word_cloud als Bild dar
+plt.imshow(word_cloud)
+
+# axis() dient der Beschriftung und erzeugung von Achsen, hier ausgeschaltet 
+plt.axis('off')
+
+# tight_layout ermöglicht ein Einbettung der Parameter zum justieren der Darstellung
+plt.tight_layout(pad=0)
+
+# show() stellt das eigentliche Bild dar
+plt.show()
